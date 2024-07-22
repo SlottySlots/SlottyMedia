@@ -4,16 +4,15 @@
         <TargetFramework>net8.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
+        <UserSecretsId>2e19f31e-c8c7-41c3-8d02-0f831a1b796f</UserSecretsId>
     </PropertyGroup>
 
     <ItemGroup>
-<<<<<<< HEAD
+      <PackageReference Include="Supabase" Version="1.0.5" />
       <Folder Include="Backend\Models\" />
       <Folder Include="Backend\Services\" />
       <Folder Include="Backend\ViewModel\" />
-=======
       <Folder Include="wwwroot\static\login\" />
->>>>>>> origin/initial_frontend
     </ItemGroup>
 
     

@@ -1,0 +1,37 @@
+﻿@page "/counter"
+@rendermode InteractiveServer
+
+@inject Backend.ViewModel.Interfaces.ICounterVm CounterVm
+
+<PageTitle>Counter</PageTitle>
+
+<h1>Counter</h1>
+
+<p role="status">Current count: @currentCount</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+@if (CounterVm.User != null)
+{
+    <p>@CounterVm.User.UserName</p>
+}
+else
+{
+    <p>Loading...</p>
+}
+
+@code {
+    private int currentCount = 0;
+
+    private void IncrementCount()
+    {
+        currentCount++;
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await CounterVm.GetUserById("c2f581fe-d2a1-433e-b9d1-6ea6ed7151c6");
+    }
+
+
+}
