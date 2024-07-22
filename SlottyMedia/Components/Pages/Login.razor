@@ -1,0 +1,52 @@
+@page "/login"
+@layout LoginLayout
+
+
+<PageTitle>Slotty Media | Login</PageTitle>
+
+
+<h2 class="text-xl font-semibold">
+    Welcome
+</h2>
+
+<p class="mt-6 mb-12 text-sm">
+    join gazillions of people online
+</p>
+
+
+<form class="w-full max-w-[400px] px-2 flex flex-col items-center gap-5">
+    
+    <!-- Username -->
+    <InputField Id="username" Name="username" Placeholder="Username">
+        <InputFieldIcon>
+            <svg width="21" height="22" viewBox="0 0 21 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 21V19.75C1 14.9175 5.2533 11 10.5 11C15.7467 11 20 14.9175 20 19.75V21" stroke="#A0A0A0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M10.5 11C13.4981 11 15.9286 8.76138 15.9286 6C15.9286 3.23857 13.4981 1 10.5 1C7.50188 1 5.07143 3.23857 5.07143 6C5.07143 8.76138 7.50188 11 10.5 11Z" stroke="#A0A0A0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </InputFieldIcon>
+    </InputField>
+
+    <!-- Password -->
+    <InputField Id="password" Name="password" Placeholder="Password" Type="password">
+        <InputFieldIcon>
+            <svg width="17" height="22" viewBox="0 0 17 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M13.5 11H15.25C15.6642 11 16 11.3358 16 11.75V20.25C16 20.6642 15.6642 21 15.25 21H1.75C1.33579 21 1 20.6642 1 20.25V11.75C1 11.3358 1.33579 11 1.75 11H3.5M13.5 11V6C13.5 4.33334 12.5 1 8.5 1C4.5 1 3.5 4.33334 3.5 6V11M13.5 11H3.5" stroke="#A0A0A0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </InputFieldIcon>
+    </InputField>
+    
+    <!-- Remember & Forgot password -->
+    <div class="w-full flex justify-between items-center text-sm">
+        <Checkbox Id="rememberLogin" Label="Remember"/>
+        <span class="h-fit underline cursor-pointer">
+            Forgot Password?
+        </span>
+    </div>
+
+    <!-- Submission Button -->
+    <button type="submit"
+            class="w-full max-w-[300px] border-none rounded-[24px] text-white bg-gradient-to-r from-fandango via-crayola-orange to-fandango hot-btn">
+        Login
+    </button>
+    
+</form>

@@ -1,0 +1,37 @@
+@inherits LayoutComponentBase
+
+
+<div class="relative w-screen h-screen flex justify-center items-center bg-black">
+    
+    <!-- Background image -->
+    <img src="static/login/background.webp" alt="" class="absolute w-full h-full opacity-50 z-[0] select-none pointer-events-none"/>
+
+    <!-- Content in center -->
+    <div class="w-full max-w-screen-lg flex z-[1]">
+
+        <!-- Left box -->
+        <div class="relative w-1/2 text-white">
+            
+            <!-- the content -->
+            <div class="px-7 py-10">
+                <h3 class="text-xl font-semibold">
+                    Join the club
+                </h3>
+                <p class="my-5 text-sm leading-5">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus.
+                </p>
+            </div>
+            
+            <!-- background -->
+            <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-grape to-fandango opacity-90 z-[-1]"></div>
+            
+        </div>
+
+        <!-- Right box -->
+        <div class="w-1/2 p-x-7 py-10 bg-white flex flex-col justify-around items-center">
+            @Body
+        </div>
+
+    </div>
+    
+</div>

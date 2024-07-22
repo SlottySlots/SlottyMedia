@@ -1,0 +1,28 @@
+<div class="w-full h-[49px] px-1 flex items-center gap-3 rounded-[24px] bg-cadet-gray-100 text-cadet-gray-800">
+    @ChildContent
+    <input
+        id="@Id"
+        name="@Name"
+        placeholder="@Placeholder"
+        type="@Type"
+        class="grow h-full outline-none bg-transparent text-cadet-gray-800"/>
+</div>
+
+
+@code
+{
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+    
+    [Parameter]
+    public string? Id { get; set; }
+    
+    [Parameter]
+    public string? Name { get; set; }
+    
+    [Parameter]
+    public string? Placeholder { get; set; }
+    
+    [Parameter]
+    public string? Type { get; set; }
+}

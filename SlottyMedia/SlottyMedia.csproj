@@ -7,9 +7,13 @@
     </PropertyGroup>
 
     <ItemGroup>
+<<<<<<< HEAD
       <Folder Include="Backend\Models\" />
       <Folder Include="Backend\Services\" />
       <Folder Include="Backend\ViewModel\" />
+=======
+      <Folder Include="wwwroot\static\login\" />
+>>>>>>> origin/initial_frontend
     </ItemGroup>
 
     
