@@ -1,3 +1,4 @@
+using Blazored.LocalStorage;
 using SlottyMedia.Backend.Models;
 using SlottyMedia.Backend.Services;
 using SlottyMedia.Backend.Services.Interfaces;
@@ -5,6 +6,7 @@ using SlottyMedia.Backend.ViewModel;
 using SlottyMedia.Backend.ViewModel.Interfaces;
 using SlottyMedia.Components;
 using Supabase;
+using ILocalStorageService = SlottyMedia.Backend.Services.Interfaces.ILocalStorageService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +14,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
+// Add Blazored LocalStorage
+builder.Services.AddBlazoredLocalStorage();
+
+builder.Services.AddScoped<ILocalStorageService>(p =>
+    new LocalStorageService(p.GetRequiredService<Blazored.LocalStorage.ILocalStorageService>()));
 // Add Supabase
 builder.Services.AddScoped(_ =>
     new Client(

@@ -9,10 +9,10 @@
     </PropertyGroup>
     
     <ItemGroup>
+      <PackageReference Include="Blazored.LocalStorage" Version="4.5.0" />
       <PackageReference Include="Supabase" Version="1.0.5" />
       <Folder Include="wwwroot\static\login\" />
       <Folder Include="Backend\Models\" />
-      <Folder Include="Backend\Services\" />
       <Folder Include="Backend\ViewModel\" />
     </ItemGroup>
 
