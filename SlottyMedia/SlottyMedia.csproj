@@ -9,9 +9,6 @@
 
     <ItemGroup>
       <PackageReference Include="Supabase" Version="1.0.5" />
-      <Folder Include="Backend\Models\" />
-      <Folder Include="Backend\Services\" />
-      <Folder Include="Backend\ViewModel\" />
       <Folder Include="wwwroot\static\login\" />
     </ItemGroup>
 

@@ -25,9 +25,11 @@ builder.Services.AddScoped(_ =>
 
 // Viewmodel
 builder.Services.AddScoped<ICounterVm, CounterVm>();
+builder.Services.AddScoped<IAuthVm, AuthVM>();
 
 // Services
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 // Model
 builder.Services.AddScoped<UserDto>();
