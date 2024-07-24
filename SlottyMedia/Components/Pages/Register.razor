@@ -1,7 +1,6 @@
-@page "/login"
-@using SlottyMedia.Backend.ViewModel.Interfaces
+@page "/register"
 @layout LoginLayout
-@inject IAuthVm iAuthVm
+
 
 <PageTitle>Slotty Media | Login</PageTitle>
 
@@ -35,21 +34,24 @@
             </svg>
         </InputFieldIcon>
     </InputField>
+
+    <!-- Confirm Password -->
+    <InputField Id="password" Name="password" Placeholder="Confirm Password" Type="password">
+        <InputFieldIcon>
+            <svg width="17" height="22" viewBox="0 0 17 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M13.5 11H15.25C15.6642 11 16 11.3358 16 11.75V20.25C16 20.6642 15.6642 21 15.25 21H1.75C1.33579 21 1 20.6642 1 20.25V11.75C1 11.3358 1.33579 11 1.75 11H3.5M13.5 11V6C13.5 4.33334 12.5 1 8.5 1C4.5 1 3.5 4.33334 3.5 6V11M13.5 11H3.5" stroke="#A0A0A0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </InputFieldIcon>
+    </InputField>
     
-    <!-- Remember & Forgot password -->
-    <div class="w-full flex justify-between items-center text-sm">
-        <Checkbox Id="rememberLogin" Label="Remember"/>
-        <span class="h-fit underline cursor-pointer">
-            Forgot Password?
-        </span>
-    </div>
+    
+
 
     <!-- Submission Button -->
     <button type="submit"
             class="w-full max-w-[300px] border-none rounded-[24px] text-white bg-gradient-to-r from-fandango via-crayola-orange to-fandango hot-btn">
-        Login
+        Register
     </button>
-
-    <span>Not yet a member? <PinkAnchor NavigationLink="/register" TextContent="Sign up!" /></span>
     
+    <span>Trying to login? <PinkAnchor NavigationLink="/login" TextContent="Sign in!" /></span>
 </form>

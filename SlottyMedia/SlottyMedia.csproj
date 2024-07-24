@@ -5,13 +5,23 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <UserSecretsId>2e19f31e-c8c7-41c3-8d02-0f831a1b796f</UserSecretsId>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
     </PropertyGroup>
-
+    
     <ItemGroup>
+      <PackageReference Include="Blazored.LocalStorage" Version="4.5.0" />
       <PackageReference Include="Supabase" Version="1.0.5" />
       <Folder Include="wwwroot\static\login\" />
+      <Folder Include="Backend\Models\" />
+      <Folder Include="Backend\ViewModel\" />
     </ItemGroup>
 
-    
+    <ItemGroup>
+      <PackageReference Include="Microsoft.AspNetCore.Components" Version="8.0.7" />
+    </ItemGroup>
+
+    <Target Name="GenerateDocumentation" AfterTargets="Build">
+        <Exec Command="dotnet tool run xmldoc2md ./bin/Debug/net8.0/SlottyMedia.dll ../slottymedia-docs/docs/code" />
+    </Target>
     
 </Project>

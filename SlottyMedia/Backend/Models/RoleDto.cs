@@ -3,6 +3,9 @@ using Supabase.Postgrest.Models;
 
 namespace SlottyMedia.Backend.Models;
 
+/// <summary>
+/// This class represents the Role table in the database.
+/// </summary>
 [Table("Role")]
 public class RoleDto : BaseModel
 {

@@ -3,13 +3,16 @@ using Supabase.Postgrest.Models;
 
 namespace SlottyMedia.Backend.Models;
 
+/// <summary>
+/// This class represents the User_Like_Post_Relation table in the database.
+/// </summary>
 [Table("User_Like_Post_Relation")]
 public class UserLikePostRelationDto : BaseModel
 {
     [PrimaryKey("userLikePostRelationID", true)]
     public int UserLikePostRelationId { get; set; }
 
-    [Reference(typeof(UserDto))] public string UserId { get; set; }
+    [Column("userID")] public string UserId { get; set; }
 
     [Reference(typeof(PostsDto))] public int PostId { get; set; }
 

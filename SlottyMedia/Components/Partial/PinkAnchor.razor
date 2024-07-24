@@ -1,0 +1,15 @@
+<a href="@NavigationLink">
+    <span class="h-fit text-fandango">
+        @TextContent
+    </span>
+</a>
+
+
+@code
+{
+    [Parameter]
+    public String NavigationLink { get; set; }
+    
+    [Parameter]
+    public String TextContent { get; set; }
+}

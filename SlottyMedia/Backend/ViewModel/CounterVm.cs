@@ -13,6 +13,7 @@ public class CounterVm : ICounterVm, INotifyPropertyChanged
 
     public CounterVm(IUserService userService)
     {
+        _user = new UserDto();
         _userService = userService;
     }
 

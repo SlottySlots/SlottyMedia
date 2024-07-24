@@ -28,6 +28,19 @@ If not obvious, or the method is more than 5 lines, it should be commented.
 - Multi-line Comments: Use /* ... */ for multi-line comments.
 - Documentation Comments: Use /// for documentation comments.
 
+### Documentation Comments
+We use the <a href="https://learn.microsoft.com/de-de/dotnet/csharp/language-reference/xmldoc/">xml documentation convention by microsoft</a>
+
+In short: You can use the following tags structures in your documentation comment to specify properties of the following code:
+
+- ```<summary>Your code summary</summary>```
+- ```<param name="str">Describe parameter.</param>```: Usage may also be nested within summary
+- ```<code>Use a codeblock within</code>```
+- ```<example>Put a example here</example>```
+
+There are plenty more tags. You can even reference other doc segments. 
+If you need other tags, take a look <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/xmldoc/recommended-tags">here</a>
+
 ## Usings and Namespaces
 
 - Sorting: Sort usings alphabetically and group by system namespace.

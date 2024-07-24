@@ -5,4 +5,8 @@ nav:
   - Database: database.md
   - MVVM: mvvm.md
   - Coding Guidelines: guidelines.md
+  - Code Documentation: code
 theme: material
+plugins:
+  - search
+  - include_dir_to_nav
