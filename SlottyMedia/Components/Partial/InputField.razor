@@ -1,3 +1,5 @@
+@typeparam TValue
+
 <div class="w-full h-[49px] px-1 flex items-center gap-3 rounded-[24px] bg-cadet-gray-100 text-cadet-gray-800">
     @ChildContent
     <input
@@ -5,6 +7,7 @@
         name="@Name"
         placeholder="@Placeholder"
         type="@Type"
+        @bind="Value"
         class="grow h-full outline-none bg-transparent text-cadet-gray-800"/>
 </div>
 
@@ -25,4 +28,10 @@
     
     [Parameter]
     public string? Type { get; set; }
+    
+    [Parameter]
+    public TValue? Value { get; set; }
+    
+    [Parameter]
+    public EventCallback<TValue> ValueChanged { get; set; }
 }

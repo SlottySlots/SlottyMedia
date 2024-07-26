@@ -32,7 +32,7 @@ builder.Services.AddScoped(_ =>
 
 // Viewmodel
 builder.Services.AddScoped<ICounterVm, CounterVm>();
-builder.Services.AddScoped<IAuthVm, AuthVM>();
+builder.Services.AddScoped<IAuthVm, AuthVm>();
 
 // Services
 builder.Services.AddScoped<IUserService, UserService>();
@@ -54,7 +54,7 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseStaticFiles();
-app.UseAntiforgery();
+app.UseAntiforgery();   
 
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
