@@ -1,12 +1,16 @@
 @page "/register"
+@using System.Text
+@using System.Text.Json
 @using SlottyMedia.Backend.Services.Interfaces
 @using SlottyMedia.Backend.ViewModel.Interfaces
+@using SlottyMedia.Controllers
 @layout LoginLayout
 @inject IAuthVm viewmodel
 @inject IAuthService service
+@inject HttpClient Http
+@using Microsoft.AspNetCore.Http
 
 <PageTitle>Slotty Media | Login</PageTitle>
-
 
 <h2 class="text-xl font-semibold">
     Welcome
@@ -16,9 +20,7 @@
     join gazillions of people online
 </p>
 
-
 <form class="w-full max-w-[400px] px-2 flex flex-col items-center gap-5">
-    
     <!-- Username -->
     <InputField Id="username" Name="username" Placeholder="Username" ValueChanged="OnInputEmail">
         <InputFieldIcon>
@@ -46,19 +48,14 @@
             </svg>
         </InputFieldIcon>
     </InputField>
-    
-    
-
 
     <!-- Submission Button -->
     <button
         class="w-full max-w-[300px] border-none rounded-[24px] text-white bg-gradient-to-r from-fandango via-crayola-orange to-fandango hot-btn"
-        @onclick="OnClickSubmit"
-        >
+        @onclick="OnClickSubmit">
         Register
-        
     </button>
-    
+
     <span>Trying to login? <PinkAnchor NavigationLink="/login" TextContent="Sign in!" /></span>
 </form>
 
@@ -85,16 +82,37 @@
 
     private string emailInput;
     private string passwordInput;
-    
-    
+
     private void OnInputEmail(string arg)
     {
         emailInput = arg;
     }
-    
+
     private void OnInputPassword(string arg)
     {
         passwordInput = arg;
+    }
+
+
+    private async Task SetCookie(string name, string? value, DateTimeOffset expires, bool httpOnly, bool secure, SameSiteMode sameSite)
+    {
+        var cookieRequest = new CookieRequest(name, value, expires, httpOnly, secure, sameSite);
+        var jsonContent = new StringContent(JsonSerializer.Serialize(cookieRequest), Encoding.UTF8, "application/json");
+
+        var response = await Http.PostAsync("api/cookie/set", jsonContent);
+        if (response.IsSuccessStatusCode)
+        {
+            Console.WriteLine("Cookie set successfully.");
+        }
+        else
+        {
+            Console.WriteLine("Failed to set cookie.");
+        }
+    }
+    
+    public abstract class Session
+    {
+        public static string? Id { get; set; }
     }
 
     private async void OnClickSubmit()
@@ -105,7 +123,7 @@
             if (session != null)
             {
                 Console.WriteLine("Registration successful, user logged in.");
-            }
+                await SetCookie("session", Session.Id, DateTimeOffset.UtcNow.AddDays(7), true, true, SameSiteMode.Strict);            }
             else
             {
                 Console.WriteLine("Registration failed.");
@@ -116,6 +134,5 @@
             Console.WriteLine($"Error: {ex.Message}");
         }
         Console.WriteLine(service.IsAuthenticated());
-        
     }
 }

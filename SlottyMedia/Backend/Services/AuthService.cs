@@ -44,12 +44,9 @@ public class AuthService(Client supabaseClient) : IAuthService
     public async Task<Session?> SetSession(string sessionToken, string refreshToken)
     {
         var session = await supabaseClient.Auth.SetSession(sessionToken, refreshToken);
-        return session; 
+        return session;
     }
-    
-    /// <summary>
-    /// This method is used to sign out the user.
-    /// </summary>
+
     public async Task SignOut()
     {
         await supabaseClient.Auth.SignOut();

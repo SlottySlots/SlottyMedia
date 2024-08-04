@@ -23,6 +23,9 @@ builder.Services.AddSingleton(_ =>
             AutoConnectRealtime = true
         }));
 
+//Register
+builder.Services.AddHttpClient();
+
 // Viewmodel
 builder.Services.AddSingleton<ICounterVm, CounterVm>();
 
