@@ -1,23 +1,17 @@
 ﻿using SlottyMedia.Database;
-using SlottyMedia.Database.Models;
+using SlottyMedia.Database.Daos;
 using Supabase;
 
 namespace SlottyMedia.Tests.DatabaseTests.DatabaseModelsTests;
 
 /// <summary>
-/// Test class for the PostsDto model.
+///     Test class for the PostsDao model.
 /// </summary>
 [TestFixture]
 public class PostDtoTest
 {
-    private Client _supabaseClient;
-    private IDatabaseActions _databaseActions;
-    private PostsDto _postToWorkWith;
-    private UserDto _userToWorkWith;
-    private ForumDto _forumToWorkWith;
-
     /// <summary>
-    /// One-time setup method to initialize Supabase client and insert test data.
+    ///     One-time setup method to initialize Supabase client and insert test data.
     /// </summary>
     [OneTimeSetUp]
     public async Task OneTimeSetup()
@@ -31,12 +25,12 @@ public class PostDtoTest
     }
 
     /// <summary>
-    /// Setup method to initialize a new PostsDto instance before each test.
+    ///     Setup method to initialize a new PostsDao instance before each test.
     /// </summary>
     [SetUp]
     public void Setup()
     {
-        _postToWorkWith = new PostsDto
+        _postToWorkWith = new PostsDao
         {
             ForumId = _forumToWorkWith.ForumId,
             UserId = _userToWorkWith.UserId,
@@ -46,7 +40,7 @@ public class PostDtoTest
     }
 
     /// <summary>
-    /// Tear down method to delete the test post after each test.
+    ///     Tear down method to delete the test post after each test.
     /// </summary>
     [TearDown]
     public async Task TearDown()
@@ -55,7 +49,8 @@ public class PostDtoTest
         {
             if (_postToWorkWith.PostId is null) return;
 
-            var post = await _databaseActions.GetEntityByField<PostsDto>("postID", _postToWorkWith.PostId);
+            var post = await _databaseActions.GetEntityByField<PostsDao>("postID",
+                _postToWorkWith.PostId.ToString() ?? "");
             if (post != null) await _databaseActions.Delete(post);
         }
         catch (Exception ex)
@@ -65,7 +60,7 @@ public class PostDtoTest
     }
 
     /// <summary>
-    /// One-time tear down method to delete the test data after all tests are run.
+    ///     One-time tear down method to delete the test data after all tests are run.
     /// </summary>
     [OneTimeTearDown]
     public async Task OneTimeTearDown()
@@ -74,10 +69,12 @@ public class PostDtoTest
         {
             if (_forumToWorkWith.ForumId is null || _userToWorkWith.UserId is null) return;
 
-            var forum = await _databaseActions.GetEntityByField<ForumDto>("forumID", _forumToWorkWith.ForumId);
+            var forum = await _databaseActions.GetEntityByField<ForumDao>("forumID",
+                _forumToWorkWith.ForumId.ToString() ?? "");
             if (forum != null) await _databaseActions.Delete(forum);
 
-            var user = await _databaseActions.GetEntityByField<UserDto>("userID", _userToWorkWith.UserId);
+            var user = await _databaseActions.GetEntityByField<UserDao>("userID",
+                _userToWorkWith.UserId.ToString() ?? "");
             if (user != null) await _databaseActions.Delete(user);
         }
         catch (Exception ex)
@@ -86,8 +83,14 @@ public class PostDtoTest
         }
     }
 
+    private Client _supabaseClient;
+    private IDatabaseActions _databaseActions;
+    private PostsDao _postToWorkWith;
+    private UserDao _userToWorkWith;
+    private ForumDao _forumToWorkWith;
+
     /// <summary>
-    /// Test method to insert a new post into the database.
+    ///     Test method to insert a new post into the database.
     /// </summary>
     [Test]
     public async Task Insert()
@@ -111,7 +114,7 @@ public class PostDtoTest
     }
 
     /// <summary>
-    /// Test method to update an existing post in the database.
+    ///     Test method to update an existing post in the database.
     /// </summary>
     [Test]
     public async Task Update()
@@ -141,7 +144,7 @@ public class PostDtoTest
     }
 
     /// <summary>
-    /// Test method to delete an existing post from the database.
+    ///     Test method to delete an existing post from the database.
     /// </summary>
     [Test]
     public async Task Delete()
@@ -161,7 +164,7 @@ public class PostDtoTest
     }
 
     /// <summary>
-    /// Test method to retrieve a post by a specific field from the database.
+    ///     Test method to retrieve a post by a specific field from the database.
     /// </summary>
     [Test]
     public async Task GetEntityByField()
@@ -175,7 +178,8 @@ public class PostDtoTest
                 Assert.That(insertedPost.PostId, Is.Not.Null, "Inserted post's PostId should not be null");
             });
 
-            var post = await _databaseActions.GetEntityByField<PostsDto>("postID", insertedPost.PostId);
+            var post = await _databaseActions.GetEntityByField<PostsDao>("postID",
+                insertedPost.PostId.ToString() ?? string.Empty);
             Assert.Multiple(() =>
             {
                 Assert.That(post, Is.Not.Null, "Retrieved post should not be null");

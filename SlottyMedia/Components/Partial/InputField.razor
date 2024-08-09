@@ -7,34 +7,35 @@
         type="@Type"
         @bind="Value"
         @oninput="_handleInput"
-        class="grow h-full outline-none bg-transparent text-cadet-gray-800" />
+        class="grow h-full outline-none bg-transparent text-cadet-gray-800"/>
 </div>
 
 @code {
+
     /// <summary>The input field's icon. Should be a "InputFieldIcon" component.</summary>
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
-    
+
     /// <summary>The input field's ID</summary>
     [Parameter]
     public string? Id { get; set; }
-    
+
     /// <summary>The input field's name</summary>
     [Parameter]
     public string? Name { get; set; }
-    
+
     /// The input field's placeholder
     [Parameter]
     public string? Placeholder { get; set; }
-    
+
     /// The input field's type
     [Parameter]
     public string? Type { get; set; }
-    
+
     /// The input field's value. Use data binding (@bind-Value) instead of manually setting this field!
     [Parameter]
     public string? Value { get; set; }
-    
+
     /// An event that is invoked whenever this input field's value changes
     [Parameter]
     public EventCallback<string?> ValueChanged { get; set; }
@@ -47,4 +48,5 @@
             await ValueChanged.InvokeAsync(newValue);
         }
     }
+
 }

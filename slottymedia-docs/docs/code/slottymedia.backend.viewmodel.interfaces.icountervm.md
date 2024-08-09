@@ -20,7 +20,7 @@ public abstract UserDto User { get; set; }
 
 #### Property Value
 
-UserDto<br>
+[UserDto](./slottymedia.backend.dtos.userdto.md)<br>
 
 ## Methods
 

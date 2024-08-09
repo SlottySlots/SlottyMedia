@@ -1,14 +1,17 @@
-﻿namespace SlottyMedia.Tests;
+﻿using SlottyMedia.Database;
+using Supabase;
+
+namespace SlottyMedia.Tests;
 
 /// <summary>
-/// Test class for the InitializeSupabaseClient class.
+///     Test class for the InitializeSupabaseClient class.
 /// </summary>
 public class InitializeSupabaseClientTest
 {
-    private Supabase.Client _supabaseClient;
+    private Client _supabaseClient;
 
     /// <summary>
-    /// Setup method to initialize the Supabase client before each test.
+    ///     Setup method to initialize the Supabase client before each test.
     /// </summary>
     [SetUp]
     public void Setup()
@@ -17,7 +20,7 @@ public class InitializeSupabaseClientTest
     }
 
     /// <summary>
-    /// Test method to verify that the Supabase client is not null.
+    ///     Test method to verify that the Supabase client is not null.
     /// </summary>
     [Test]
     public void TestGetSupabaseClient()

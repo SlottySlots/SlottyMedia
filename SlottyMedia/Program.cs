@@ -1,11 +1,12 @@
+using SlottyMedia.Backend.Dtos;
 using SlottyMedia.Backend.Services;
 using SlottyMedia.Backend.Services.Interfaces;
 using SlottyMedia.Backend.ViewModel;
 using SlottyMedia.Backend.ViewModel.Interfaces;
 using SlottyMedia.Components;
-using SlottyMedia.Database.Models;
 using SlottyMedia.Database;
-using Supabase;
+using SlottyMedia.Database.Daos;
+using SlottyMedia.DatabaseSeeding;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,39 +15,51 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 // Add Supabase
-var url = Environment.GetEnvironmentVariable("SUPABASE_URL");
-var key = Environment.GetEnvironmentVariable("SUPABASE_KEY");
-if (url is null || key is null) throw new Exception("Supabase settings not found");
 builder.Services.AddSingleton(_ =>
-    new Client(
-        url, key,
-        new SupabaseOptions
-        {
-            AutoRefreshToken = true,
-            AutoConnectRealtime = true
-        }));
+    InitializeSupabaseClient.GetSupabaseClient());
 
 
 // Database
 builder.Services.AddSingleton<IDatabaseActions, DatabaseActions>();
 
-// Model
+// Daos
+builder.Services.AddSingleton<UserDao>();
+builder.Services.AddSingleton<PostsDao>();
+builder.Services.AddSingleton<ForumDao>();
+builder.Services.AddSingleton<CommentDao>();
+builder.Services.AddSingleton<FollowerUserRelationDao>();
+builder.Services.AddSingleton<UserLikePostRelationDao>();
+
+// DtOs
 builder.Services.AddSingleton<UserDto>();
+builder.Services.AddSingleton<PostDto>();
+builder.Services.AddSingleton<ForumDto>();
+builder.Services.AddSingleton<FriendsOfUserDto>();
+builder.Services.AddSingleton<ProfilePicDto>();
+builder.Services.AddSingleton<SearchDto>();
+
 
 // Viewmodel
-builder.Services.AddSingleton<ICounterVm, CounterVm>();
+builder.Services.AddScoped<ISignupFormVm, SignupFormVmImpl>();
 
 
 // Services
-builder.Services.AddSingleton<IUserService, UserService>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IPostService, PostService>();
 builder.Services.AddScoped<ICookieService, CookieService>();
-
-
-builder.Services.AddScoped<IAuthService, AuthService>();  // Scoped
+builder.Services.AddScoped<IAuthService, AuthService>(); // Scoped
 builder.Services.AddScoped<ISignupService, SignupServiceImpl>();
-builder.Services.AddScoped<ISignupFormVm, SignupFormVmImpl>(); 
+builder.Services.AddScoped<ISearchService, SearchService>();
 
 var app = builder.Build();
+
+// Seed the database
+using (var scope = app.Services.CreateScope())
+{
+    var seeder = scope.ServiceProvider.GetRequiredService<IDatabaseActions>();
+    Seeding seeding = new(seeder);
+    await seeding.Seed(seeder);
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

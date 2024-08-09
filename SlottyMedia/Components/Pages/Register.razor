@@ -17,7 +17,7 @@
 
 
 <form @onsubmit="SubmitForm" class="w-full max-w-[400px] px-2 flex flex-col items-center gap-5">
-    
+
     <!-- Username -->
     <InputField Id="username" Name="username" Placeholder="Username" @bind-Value="Model!.Username">
         <InputFieldIcon>
@@ -27,7 +27,7 @@
             </svg>
         </InputFieldIcon>
     </InputField>
-    
+
     <!-- username error message -->
     @if (Model.UsernameErrorMessage != null)
     {
@@ -83,19 +83,17 @@
     <HotButton Type="submit" Class="w-full max-w-[300px]">
         Sign Up
     </HotButton>
-    
+
     <span>
         Already a member? <Link To="/login">Sign In</Link>
     </span>
-    
+
 </form>
 
 
 @code
 {
-    [Inject]
-    [SupplyParameterFromForm]
-    public ISignupFormVm? Model { get; set; }
+    [Inject] [SupplyParameterFromForm] public ISignupFormVm? Model { get; set; }
 
     private async Task SubmitForm()
     {
@@ -108,6 +106,7 @@
             // return if errors occured, because errors will be displayed automatically
             return;
         }
+
         // if no errors occured during signup: redirect to main page
         NavigationManager.NavigateTo("/");
     }

@@ -5,23 +5,24 @@
     width="28"
     viewBox="0 0 26 23"
     xmlns="http://www.w3.org/2000/svg"
-    class=@("fill-transparent stroke-cadet-gray stroke-[1.5px] duration-300 cursor-pointer " + (_value? "!stroke-fandango !fill-fandango " : "") + Class)>
+    class=@("fill-transparent stroke-cadet-gray stroke-[1.5px] duration-300 cursor-pointer " + (_value ? "!stroke-fandango !fill-fandango " : "") + Class)>
     <path d="M1 8.02263C1 13.8581 5.82332 16.9678 9.35408 19.7512C10.6 20.7334 11.8 21.6581 13 21.6581C14.2 21.6581 15.4 20.7334 16.646 19.7512C20.1767 16.9678 25 13.8581 25 8.02263C25 2.1871 18.3998 -1.95134 13 3.65886C7.60019 -1.95134 1 2.1871 1 8.02263Z"/>
 </svg>
 
 
 @code {
+
     /// <summary>Additional CSS classes to apply to the outer SVG image.</summary>
     [Parameter]
     public string? Class { get; set; }
-    
+
     /// <summary>The button's initial value. If true, this button is "turned on".</summary>
     [Parameter]
     public bool? Initial { get; set; }
 
     /// <summary>
-    /// An event that is triggered when this button is clicked. The callback's parameter
-    /// is a boolean that represents the button's new state.
+    ///     An event that is triggered when this button is clicked. The callback's parameter
+    ///     is a boolean that represents the button's new state.
     /// </summary>
     [Parameter]
     public EventCallback<bool>? OnClick { get; set; }

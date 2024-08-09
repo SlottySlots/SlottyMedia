@@ -6,33 +6,33 @@
 
 
 @code {
-    ///
+
     /// <summary>This component represents a tag.</summary>
     /// <exception cref="ArgumentException">If an illegal color was provided.</exception>
-    /// 
-    
     /// <summary>
-    /// The tag's content. Should be a string and start with a hashtag.
+    ///     The tag's content. Should be a string and start with a hashtag.
     /// </summary>
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
 
     /// <summary>
-    /// The tag's color.
-    /// Should be one of 'savoy-blue', 'grape', 'fandango', 'crayola-orange', 'jasmine'.
-    /// Default is 'fandango'.
+    ///     The tag's color.
+    ///     Should be one of 'savoy-blue', 'grape', 'fandango', 'crayola-orange', 'jasmine'.
+    ///     Default is 'fandango'.
     /// </summary>
-    [Parameter] public string? Color { get; set; } = "fandango";
+    [Parameter]
+    public string? Color { get; set; } = "fandango";
 
     /// <summary>
-    /// Additional CSS classes to apply to the outermost container of this component.
+    ///     Additional CSS classes to apply to the outermost container of this component.
     /// </summary>
-    [Parameter] public string? Class { get; set; } = "";
-    
+    [Parameter]
+    public string? Class { get; set; } = "";
+
     // TODO Discuss the tag color's usability and limit customization as needed! Too many colors & too much variation = bad
 
     /// <summary>
-    /// Computes the final CSS classes based on the given 'Color' parameter.
+    ///     Computes the final CSS classes based on the given 'Color' parameter.
     /// </summary>
     string TagClass => Color switch
     {

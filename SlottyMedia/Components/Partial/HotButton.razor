@@ -6,22 +6,22 @@
 </button>
 
 @code {
+
     /// This component is a special button that, when hovered, can change its background by "sliding" it.
     /// For usability reasons, this button should be used SPARINGLY! Visually impactful elements can add
     /// a lot of clutter to the UI and can confuse the user.
-    
     /// <summary>Additional CSS classes to add to this button.</summary>
     [Parameter]
     public string? Class { get; set; }
-    
+
     /// <summary>This button's type (see HTML5 specifications).</summary>
     [Parameter]
     public string? Type { get; set; }
-    
+
     /// <summary>This button's child content, ideally just a string.</summary>
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
-    
+
     /// <summary>An event that is triggered when this button is clicked.</summary>
     [Parameter]
     public EventCallback? OnClick { get; set; }
@@ -31,4 +31,5 @@
         if (OnClick != null)
             await OnClick.Value.InvokeAsync();
     }
+
 }

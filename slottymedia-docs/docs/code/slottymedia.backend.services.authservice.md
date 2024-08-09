@@ -26,7 +26,7 @@ public AuthService(Client supabaseClient, ICookieService cookieService)
 `supabaseClient` Client<br>
 Injected supabaseClient
 
-`cookieService` [ICookieService](./slottymedia.backend.services.icookieservice.md)<br>
+`cookieService` [ICookieService](./slottymedia.backend.services.interfaces.icookieservice.md)<br>
 Injected cookieService
 
 ## Methods

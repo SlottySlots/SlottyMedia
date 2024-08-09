@@ -2,24 +2,24 @@
 
 
 <div class="w-screen h-screen grid grid-cols-5">
-    
+
     <!-- sidebar on the left -->
     <div class="h-full border-r border-athens-gray">
 
         <!-- top box -->
         <div class="relative w-full h-2/5 bg-gradient-to-br from-grape to-fandango">
-            
+
             <!-- login box -->
             <Card Class="
                     absolute w-full max-w-[280px]
                     flex flex-col items-center gap-5
                     left-1/2 bottom-0 -translate-x-1/2 translate-y-1/2">
-                
+
                 <!-- title -->
                 <h3 class="text-lg font-semibold my-3">
                     Login Now
                 </h3>
-                
+
                 <form class="w-full flex flex-col items-center gap-3">
 
                     <!-- username -->
@@ -51,38 +51,38 @@
                     <HotButton Type="submit" Class="w-full max-w-[150px]">
                         Submit
                     </HotButton>
-                    
+
                 </form>
 
                 <a href="/register" class="mb-3 text-sm text-fandango underline duration-500 hover:text-crayola-orange">
                     sign up instead
                 </a>
-                
+
             </Card>
 
         </div>
-        
+
         <!-- bottom box -->
         <div class="w-full h-3/5 flex justify-center items-center bg-[#FAF8FB]">
-            
+
             <!-- links -->
             <div>
 
             </div>
-            
+
         </div>
-        
+
     </div>
-    
+
     <!-- container for top bar, main content, friends section -->
     <div class="h-full col-span-4 flex flex-col">
-        
+
         <!-- top bar -->
         <div class="h-[80px] px-7 flex justify-between items-center border-b border-athens-gray">
-            
+
             <!-- search bar -->
             <div class="max-w-[500px] h-full flex items-center gap-3">
-                
+
                 <!-- lens icon -->
                 <svg width="23" height="23" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M12.1111 23.2222C18.2476 23.2222 23.2222 18.2476 23.2222 12.1111C23.2222 5.97462 18.2476 1 12.1111 1C5.97461 1 1 5.97462 1 12.1111C1 18.2476 5.97461 23.2222 12.1111 23.2222Z" stroke="#A0A0A0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -97,7 +97,7 @@
                     class="grow h-full outline-none text-cadet-gray-800 font-medium"/>
 
             </div>
-            
+
             <!-- links on right of bar -->
             <div>
                 <!-- login -->
@@ -107,26 +107,26 @@
             </div>
 
         </div>
-        
+
         <!-- container for main content & friends section -->
         <div class="h-full grid grid-cols-4">
-            
+
             <!-- main content (center) -->
             <div class="h-full col-span-3">
                 @Body
             </div>
-            
+
             <!-- friends bar on the right -->
             <div class="h-full bg-[#FEFDFE] border-l border-athens-gray">
-                
+
                 <!-- friends card -->
                 <Card Class="min-h-[250px] mt-20 mx-7 flex flex-col items-center">
-                    
+
                     <!-- title -->
                     <h3 class="font-semibold text-lg">
                         Friends
                     </h3>
-                    
+
                     <!-- no friends :( -->
                     <div class="grow flex flex-col justify-center items-center">
                         <span>So empty here...</span>
@@ -134,11 +134,11 @@
                     </div>
 
                 </Card>
-                
+
             </div>
 
         </div>
-        
+
     </div>
-    
+
 </div>

@@ -12,6 +12,12 @@ public interface IAuthService
 
 ### **SignUp(String, String)**
 
+#### Caution
+
+This method is deprecated, use ISignupService instead.
+
+---
+
 This method is used to sign up the user.
 
 ```csharp

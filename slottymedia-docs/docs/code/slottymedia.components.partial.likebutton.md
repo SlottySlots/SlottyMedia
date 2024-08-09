@@ -13,6 +13,8 @@ Implements IComponent, IHandleEvent, IHandleAfterRender
 
 ### **Class**
 
+Additional CSS classes to apply to the outer SVG image.
+
 ```csharp
 public string Class { get; set; }
 ```
@@ -23,6 +25,8 @@ public string Class { get; set; }
 
 ### **Initial**
 
+The button's initial value. If true, this button is "turned on".
+
 ```csharp
 public Nullable<bool> Initial { get; set; }
 ```
@@ -32,6 +36,9 @@ public Nullable<bool> Initial { get; set; }
 [Nullable&lt;Boolean&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.nullable-1)<br>
 
 ### **OnClick**
+
+An event that is triggered when this button is clicked. The callback's parameter
+ is a boolean that represents the button's new state.
 
 ```csharp
 public Nullable<EventCallback<bool>> OnClick { get; set; }
@@ -60,3 +67,9 @@ protected void BuildRenderTree(RenderTreeBuilder __builder)
 #### Parameters
 
 `__builder` RenderTreeBuilder<br>
+
+### **OnInitialized()**
+
+```csharp
+protected void OnInitialized()
+```

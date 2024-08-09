@@ -1,24 +1,17 @@
 ﻿using SlottyMedia.Database;
-using SlottyMedia.Database.Models;
+using SlottyMedia.Database.Daos;
 using Supabase;
 
 namespace SlottyMedia.Tests.DatabaseTests.DatabaseModelsTests;
 
 /// <summary>
-/// Test class for the UserLikePostRelationDto model.
+///     Test class for the FollowerUserRelationDao model.
 /// </summary>
 [TestFixture]
-public class UserLikePostRelationDtoTest
+public class FollowerUserRelationDaoTest
 {
-    private Client _supabaseClient;
-    private IDatabaseActions _databaseActions;
-    private UserLikePostRelationDto _relationToWorkWith;
-    private UserDto _userToWorkWith;
-    private PostsDto _postToWorkWith;
-    private ForumDto _forumToWorkWirh;
-
     /// <summary>
-    /// One-time setup method to initialize Supabase client and insert test data.
+    ///     One-time setup method to initialize Supabase client and insert test data.
     /// </summary>
     [OneTimeSetUp]
     public async Task OneTimeSetup()
@@ -26,39 +19,36 @@ public class UserLikePostRelationDtoTest
         _supabaseClient = InitializeSupabaseClient.GetSupabaseClient();
         _databaseActions = new DatabaseActions(_supabaseClient);
 
-        _userToWorkWith = await _databaseActions.Insert(InitializeModels.GetUserDto());
+        _followerUser = await _databaseActions.Insert(InitializeModels.GetUserDto());
 
-        _forumToWorkWirh = await _databaseActions.Insert(InitializeModels.GetForumDto(_userToWorkWith));
-
-        _postToWorkWith =
-            await _databaseActions.Insert(InitializeModels.GetPostsDto(_forumToWorkWirh, _userToWorkWith));
+        _followedUser = await _databaseActions.Insert(InitializeModels.GetUserDto());
     }
 
     /// <summary>
-    /// Setup method to initialize a new UserLikePostRelationDto instance before each test.
+    ///     Setup method to initialize a new FollowerUserRelationDao instance before each test.
     /// </summary>
     [SetUp]
     public void Setup()
     {
-        _relationToWorkWith = new UserLikePostRelationDto
+        _relationToWorkWith = new FollowerUserRelationDao
         {
-            UserId = _userToWorkWith.UserId,
-            PostId = _postToWorkWith.PostId
+            FollowerUserId = _followerUser.UserId,
+            FollowedUserId = _followedUser.UserId
         };
     }
 
     /// <summary>
-    /// Tear down method to delete the test relation after each test.
+    ///     Tear down method to delete the test relation after each test.
     /// </summary>
     [TearDown]
     public async Task TearDown()
     {
         try
         {
-            if (_relationToWorkWith.UserLikePostRelationId is null) return;
+            if (_relationToWorkWith.FollowerUserRelationId is null) return;
 
-            var relation = await _databaseActions.GetEntityByField<UserLikePostRelationDto>("userLikePostRelationID",
-                _relationToWorkWith.UserLikePostRelationId);
+            var relation = await _databaseActions.GetEntityByField<FollowerUserRelationDao>("followerUserRelationID",
+                _relationToWorkWith.FollowerUserRelationId.ToString() ?? "");
             if (relation != null) await _databaseActions.Delete(relation);
         }
         catch (Exception ex)
@@ -68,24 +58,22 @@ public class UserLikePostRelationDtoTest
     }
 
     /// <summary>
-    /// One-time tear down method to delete the test data after all tests are run.
+    ///     One-time tear down method to delete the test data after all tests are run.
     /// </summary>
     [OneTimeTearDown]
     public async Task OneTimeTearDown()
     {
         try
         {
-            if (_postToWorkWith.PostId is null || _forumToWorkWirh.ForumId is null ||
-                _userToWorkWith.UserId is null) return;
+            if (_followerUser.UserId is null || _followedUser.UserId is null) return;
 
-            var post = await _databaseActions.GetEntityByField<PostsDto>("postID", _postToWorkWith.PostId);
-            if (post != null) await _databaseActions.Delete(post);
+            var follower =
+                await _databaseActions.GetEntityByField<UserDao>("userID", _followerUser.UserId.ToString() ?? "");
+            if (follower != null) await _databaseActions.Delete(follower);
 
-            var forum = await _databaseActions.GetEntityByField<ForumDto>("forumID", _forumToWorkWirh.ForumId);
-            if (forum != null) await _databaseActions.Delete(forum);
-
-            var user = await _databaseActions.GetEntityByField<UserDto>("userID", _userToWorkWith.UserId);
-            if (user != null) await _databaseActions.Delete(user);
+            var followed =
+                await _databaseActions.GetEntityByField<UserDao>("userID", _followedUser.UserId.ToString() ?? "");
+            if (followed != null) await _databaseActions.Delete(followed);
         }
         catch (Exception ex)
         {
@@ -93,8 +81,14 @@ public class UserLikePostRelationDtoTest
         }
     }
 
+    private Client _supabaseClient;
+    private IDatabaseActions _databaseActions;
+    private FollowerUserRelationDao _relationToWorkWith;
+    private UserDao _followerUser;
+    private UserDao _followedUser;
+
     /// <summary>
-    /// Test method to insert a new user-like-post relation into the database.
+    ///     Test method to insert a new follower-user relation into the database.
     /// </summary>
     [Test]
     public async Task Insert()
@@ -105,8 +99,10 @@ public class UserLikePostRelationDtoTest
             Assert.Multiple(() =>
             {
                 Assert.That(insertedRelation, Is.Not.Null, "Inserted relation should not be null");
-                Assert.That(insertedRelation.UserId, Is.EqualTo(_relationToWorkWith.UserId), "UserId should match");
-                Assert.That(insertedRelation.PostId, Is.EqualTo(_relationToWorkWith.PostId), "PostId should match");
+                Assert.That(insertedRelation.FollowerUserId, Is.EqualTo(_relationToWorkWith.FollowerUserId),
+                    "FollowerUserId should match");
+                Assert.That(insertedRelation.FollowedUserId, Is.EqualTo(_relationToWorkWith.FollowedUserId),
+                    "FollowedUserId should match");
             });
 
             _relationToWorkWith = insertedRelation;
@@ -118,7 +114,7 @@ public class UserLikePostRelationDtoTest
     }
 
     /// <summary>
-    /// Test method to delete an existing user-like-post relation from the database.
+    ///     Test method to delete an existing follower-user relation from the database.
     /// </summary>
     [Test]
     public async Task Delete()
@@ -138,7 +134,7 @@ public class UserLikePostRelationDtoTest
     }
 
     /// <summary>
-    /// Test method to retrieve a user-like-post relation by a specific field from the database.
+    ///     Test method to retrieve a follower-user relation by a specific field from the database.
     /// </summary>
     [Test]
     public async Task GetEntityByField()
@@ -149,18 +145,21 @@ public class UserLikePostRelationDtoTest
             Assert.Multiple(() =>
             {
                 Assert.That(insertedRelation, Is.Not.Null, "Inserted relation should not be null");
-                Assert.That(insertedRelation.UserLikePostRelationId, Is.Not.Null, "Inserted relation ID should not be null");
+                Assert.That(insertedRelation.FollowerUserRelationId, Is.Not.Null,
+                    "Inserted relation should have a FollowerUserRelationId");
             });
 
-            var relation = await _databaseActions.GetEntityByField<UserLikePostRelationDto>("userLikePostRelationID",
-                insertedRelation.UserLikePostRelationId);
+            var relation = await _databaseActions.GetEntityByField<FollowerUserRelationDao>("followerUserRelationID",
+                insertedRelation.FollowerUserRelationId.ToString() ?? "");
             Assert.Multiple(() =>
             {
                 Assert.That(relation, Is.Not.Null, "Retrieved relation should not be null");
                 if (relation != null)
                 {
-                    Assert.That(relation.UserId, Is.EqualTo(insertedRelation.UserId), "UserId should match");
-                    Assert.That(relation.PostId, Is.EqualTo(insertedRelation.PostId), "PostId should match");
+                    Assert.That(relation.FollowerUserId, Is.EqualTo(insertedRelation.FollowerUserId),
+                        "FollowerUserId should match");
+                    Assert.That(relation.FollowedUserId, Is.EqualTo(insertedRelation.FollowedUserId),
+                        "FollowedUserId should match");
                     Assert.That(relation.CreatedAt, Is.EqualTo(insertedRelation.CreatedAt), "CreatedAt should match");
                 }
             });

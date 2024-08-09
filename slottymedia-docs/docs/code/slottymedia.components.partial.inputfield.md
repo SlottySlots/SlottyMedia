@@ -13,6 +13,8 @@ Implements IComponent, IHandleEvent, IHandleAfterRender
 
 ### **ChildContent**
 
+The input field's icon. Should be a "InputFieldIcon" component.
+
 ```csharp
 public RenderFragment ChildContent { get; set; }
 ```
@@ -23,6 +25,8 @@ RenderFragment<br>
 
 ### **Id**
 
+The input field's ID
+
 ```csharp
 public string Id { get; set; }
 ```
@@ -32,6 +36,8 @@ public string Id { get; set; }
 [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 
 ### **Name**
+
+The input field's name
 
 ```csharp
 public string Name { get; set; }
@@ -55,6 +61,16 @@ public string Placeholder { get; set; }
 
 ```csharp
 public string Type { get; set; }
+```
+
+#### Property Value
+
+[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+
+### **Value**
+
+```csharp
+public string Value { get; set; }
 ```
 
 #### Property Value

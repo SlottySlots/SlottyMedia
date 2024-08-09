@@ -1,16 +1,15 @@
-using SlottyMedia.Backend.Exceptions;
+using SlottyMedia.Backend.Exceptions.signup;
 using Supabase.Gotrue;
 
 namespace SlottyMedia.Backend.Services.Interfaces;
 
-
 /// <summary>
-/// This service is used for signup operations for new users.
+///     This service is used for signup operations for new users.
 /// </summary>
 public interface ISignupService
 {
     /// <summary>
-    /// Attempts to perform a signup operation.
+    ///     Attempts to perform a signup operation.
     /// </summary>
     /// <param name="username">The user's username</param>
     /// <param name="email">The user's email</param>

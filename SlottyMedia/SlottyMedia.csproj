@@ -9,9 +9,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Supabase" Version="1.1.1" />
-      <Folder Include="wwwroot\static\login\" />
-      <Folder Include="Backend\ViewModel\" />
+        <PackageReference Include="Supabase" Version="1.1.1"/>
+        <Folder Include="wwwroot\static\login\"/>
+        <Folder Include="Backend\ViewModel\"/>
     </ItemGroup>
 
     <ItemGroup>
@@ -19,6 +19,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\SlottyMedia.DatabaseSeeding\SlottyMedia.DatabaseSeeding.csproj"/>
         <ProjectReference Include="..\SlottyMedia.Database\SlottyMedia.Database.csproj"/>
     </ItemGroup>
 

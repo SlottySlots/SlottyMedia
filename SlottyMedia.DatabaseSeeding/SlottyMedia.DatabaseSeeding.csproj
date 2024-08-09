@@ -1,19 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <OutputType>Exe</OutputType>
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\SlottyMedia.Database\SlottyMedia.Database.csproj" />
+        <ProjectReference Include="..\SlottyMedia.Database\SlottyMedia.Database.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Bogus" Version="35.6.0" />
-      <PackageReference Include="Supabase" Version="1.1.1" />
+        <PackageReference Include="Bogus" Version="35.6.0"/>
+        <PackageReference Include="Supabase" Version="1.1.1"/>
     </ItemGroup>
 
 </Project>
